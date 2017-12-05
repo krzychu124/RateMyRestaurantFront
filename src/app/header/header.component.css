@@ -21,7 +21,9 @@
   background-color: #a34441 !important;
   background-image: url("https://www.transparenttextures.com/patterns/classy-fabric.png");
   z-index: 10 !important;
-  min-height: 100px;
+  min-height: 70px;
+  max-height: 90px;
+  height: 10vh;
 }
 
 #navbarRight {
