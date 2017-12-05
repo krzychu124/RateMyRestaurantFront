@@ -13,8 +13,7 @@
     <span>Searching radius: {{ displayRadius() }}m</span>
     <button mat-raised-button class="btn-block button-background radius" (click)="search()">Search!</button>
     <div>
-      <span *ngIf="showSearchingInfo" style="color:rgb(2, 76, 173);"><br>Searching...
-       <mat-progress-bar mode="query"></mat-progress-bar></span>
+       <mat-progress-bar class="searching-anim" *ngIf="showSearchingInfo" mode="query"></mat-progress-bar>
     </div>
   </mat-card-content>
 </mat-card>
