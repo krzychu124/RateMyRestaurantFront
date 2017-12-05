@@ -1,57 +1,55 @@
-<div class="container-fluid">
-  <div id="background" class="row">
-    <div class="col-md-12">
-      <div id="map">
-        <div *ngIf="showDetails" class="parent-container">
-          <app-place-details (showDetails)="handleShowDetails()" [placeDetailsData]="placeDetailsData"></app-place-details>
-        </div>
-        <div class="loader" [hidden]="loading != true"></div>
-        <div class="dimm" [hidden]="loading != true"></div>
-        <div class="help">
-          <span matTooltip="Decrease radius to get more precise results" matTooltipPosition="right" class="material-icons md-48">help_outline</span>
-        </div>
-
-        <app-food-search class=" search-food"></app-food-search>
-
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDoubleClickZoom]=true [styles]="mapStyle" (mapDblClick)="moveLocationMarker($event)">
-          <agm-marker [(latitude)]="lat" [(longitude)]="lng" [(label)]="label" [markerDraggable]=true (dragEnd)="updateMapCenter($event)">
-            <agm-snazzy-info-window [maxWidth]=340 [isOpen]="true" [closeWhenOthersOpen]="true">
-              <ng-template class="infoTemplate">
-                Are you here?
-                <small>
-                  <br>Drag pin to change location or
-                  <br> double click on map</small>
-                <button class="btn btn-info btn-block search-button" (click)="findPlaces()">Find places</button>
-              </ng-template>
-            </agm-snazzy-info-window>
-          </agm-marker>
-
-          <agm-circle [(latitude)]="lat" [(longitude)]="lng" [(radius)]="radius" (radiusChange)="radiusChanged()" [fillColor]="'lime'"
-            [editable]="true" [fillOpacity]="0.3">
-          </agm-circle>
-
-          <div *ngFor="let place of places; let i= index">
-            <agm-marker [latitude]="place.location.lat" [longitude]="place.location.lng" label={{i+1}} (mouseOver)="infoEnter($event, infoWindow)"
-              (mouseOut)="infoOut($event, infoWindow)" [markerClickable]=true (markerClick)="showPlaceDetails(i)">
-              <agm-info-window #infoWindow>
-                {{getInfo(i)}}
-              </agm-info-window>
-            </agm-marker>
-          </div>
-        </agm-map>
-
-        <mat-card class=" place-list" *ngIf="places.length !==0">
-          <div id="placeList">
-            <div *ngFor="let placeDetail of places; let i= index" class="list-group">
-              <div class="list-group-item place-list-item2 list-group-item-action" (click)="showPlaceDetails(i)" id="placeDetail.id" role="tab"
-                aria-controls="i">
-                {{ i+1 }}.
-                <strong>{{ placeDetail.name }}</strong>
-              </div>
-            </div>
-          </div>
-        </mat-card>
-      </div>
+<div id="background" class="container-map">
+  <div class="map">
+    <div *ngIf="showDetails" class="parent-container">
+      <app-place-details (showDetails)="handleShowDetails()" [placeDetailsData]="placeDetailsData"></app-place-details>
     </div>
+    <div class="loader" [hidden]="loading != true"></div>
+    <div class="dimm" [hidden]="loading != true"></div>
+    <div class="help">
+      <span matTooltip="Decrease radius to get more precise results" matTooltipPosition="right" class="material-icons md-48">help_outline</span>
+    </div>
+
+    <app-food-search class=" search-food"></app-food-search>
+
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDoubleClickZoom]=true [styles]="mapStyle" (mapDblClick)="moveLocationMarker($event)">
+      <agm-marker [(latitude)]="lat" [(longitude)]="lng" [(label)]="label" [markerDraggable]=true (dragEnd)="updateMapCenter($event)">
+        <agm-snazzy-info-window [maxWidth]=340 [isOpen]="true" [closeWhenOthersOpen]="true">
+          <ng-template>
+            <div class="infoTemplate">
+              Are you here?
+              <small>
+                <br>Drag pin to change location or
+                <br> double click on map</small>
+              <!-- <button mat-raised-button color="primary" class="btn-block search-button" (click)="findPlaces()">Find places</button> -->
+            </div>
+          </ng-template>
+        </agm-snazzy-info-window>
+      </agm-marker>
+
+      <agm-circle [(latitude)]="lat" [(longitude)]="lng" [(radius)]="radius" (radiusChange)="radiusChanged()" [fillColor]="'lime'"
+        [editable]="true" [fillOpacity]="0.3">
+      </agm-circle>
+
+      <div *ngFor="let place of places; let i= index">
+        <agm-marker [latitude]="place.location.lat" [longitude]="place.location.lng" label={{i+1}} (mouseOver)="infoEnter($event, infoWindow)"
+          (mouseOut)="infoOut($event, infoWindow)" [markerClickable]=true (markerClick)="showPlaceDetails(i)">
+          <agm-info-window #infoWindow>
+            {{getInfo(i)}}
+          </agm-info-window>
+        </agm-marker>
+      </div>
+    </agm-map>
+
+    <mat-card class=" place-list" *ngIf="places.length !==0">
+      <div id="placeList">
+        <div *ngFor="let placeDetail of places; let i= index" class="list-group">
+          <div class="list-group-item place-list-item2 list-group-item-action" (click)="showPlaceDetails(i)" id="placeDetail.id" role="tab"
+            aria-controls="i">
+            {{ i+1 }}.
+            <strong>{{ placeDetail.name }}</strong>
+          </div>
+        </div>
+      </div>
+    </mat-card>
   </div>
 </div>
