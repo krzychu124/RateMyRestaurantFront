@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "./styles/kebstaurant-app-theme.scss",
         "styles.css",
         "../node_modules/snazzy-info-window/dist/snazzy-info-window.css"
       ],
