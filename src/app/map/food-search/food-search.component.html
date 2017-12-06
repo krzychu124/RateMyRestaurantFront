@@ -2,7 +2,10 @@
   <mat-card-content >
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="All food types or pick one" aria-label="Number" [formControl]="searchControl" [matAutocomplete]="auto">
+        <input matInput type="text" placeholder="All food types or pick one" aria-label="Number" [formControl]="searchControl" [matAutocomplete]="auto" [(ngModel)]="value">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon color="primary">close</mat-icon>
+        </button>
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
             {{ option.name }}

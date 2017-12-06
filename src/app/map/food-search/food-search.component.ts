@@ -22,6 +22,7 @@ export class FoodSearchComponent implements OnInit {
   radius: number;
   private placePins: PlacePin[] = [];
   showSearchingInfo = false;
+  value = '';
   constructor(private dataService: DataService, private webApi: WebApiObservableService) { }
 
   ngOnInit() {
